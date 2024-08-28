@@ -25,6 +25,11 @@ const app = createApp(App)
 app.use(PrimeVue, {
   theme: {
     preset: Aura,
+    options: {
+      prefix: 'eno',
+      darkModeSelector: '.dark',
+      cssLayer: false,
+    },
   },
 })
 app.use(router)

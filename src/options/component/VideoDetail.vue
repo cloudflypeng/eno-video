@@ -41,7 +41,7 @@ function play(url: string) {
   <div class="w-[50vw]">
     <Drawer
       v-model:visible="settingStore.isShowVideoDetail"
-      class="px-5 py-3"
+      class="px-5 py-3 overflow-y-auto"
       style="width: 50vw;"
       @close="close"
     >
