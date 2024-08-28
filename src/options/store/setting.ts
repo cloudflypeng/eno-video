@@ -5,6 +5,7 @@ import type { VideoCoverType } from '../types/video'
 interface Subscription {
   name: string
   url: string
+  status: 'available' | 'unavailable' | 'unknown'
 }
 
 interface SettingState {
@@ -25,6 +26,7 @@ export const useSettingStore = defineStore('setting', {
     currentSubscription: useLocalStorage('currentSubscription', {
       name: '',
       url: '',
+      status: 'unknown',
     }),
     subscription: useLocalStorage('subscription', []),
     isShowVideoDetail: false,
@@ -32,7 +34,21 @@ export const useSettingStore = defineStore('setting', {
   }),
   actions: {
     addSubscription(subscription: Subscription) {
-      this.subscription.push(subscription)
+      this.subscription.push({
+        ...subscription,
+        status: 'unknown',
+      })
+    },
+    checkSubscriptionStatus() {
+      this.subscription.forEach(async (subscription) => {
+        const response = await fetch(subscription.url)
+        if (response.ok) {
+          subscription.status = 'available'
+        }
+        else {
+          subscription.status = 'unavailable'
+        }
+      })
     },
   },
 })

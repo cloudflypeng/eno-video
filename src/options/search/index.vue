@@ -21,8 +21,10 @@ function search() {
 
 <template>
   <section class="flex flex-col gap-4 items-start p-4">
-    <InputText v-model="keyword" />
-    <Button label="搜索" @click="search" />
+    <div class="flex flex-row gap-4 items-center justify-center w-full">
+      <InputText v-model="keyword" @keyup.enter="search" />
+      <Button label="搜索" @click="search" />
+    </div>
     <div class="flex gap-4 flex-wrap">
       <VideoCover
         v-for="item in result"

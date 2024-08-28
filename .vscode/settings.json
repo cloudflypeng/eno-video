@@ -2,7 +2,9 @@
   "cSpell.words": [
     "efetch",
     "primevue",
-    "Vitesse"
+    "videojs",
+    "Vitesse",
+    "vueuse"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "vite.autoStart": false,

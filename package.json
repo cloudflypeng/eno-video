@@ -35,6 +35,7 @@
     "@primevue/themes": "^4.0.5",
     "pinia": "^2.2.2",
     "primevue": "^4.0.5",
+    "video.js": "^8.17.3",
     "vue-router": "4"
   },
   "devDependencies": {

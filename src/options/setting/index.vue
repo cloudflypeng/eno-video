@@ -12,6 +12,7 @@ function addSubscription() {
   settingStore.addSubscription({
     name: name.value,
     url: url.value,
+    status: 'unknown',
   })
 }
 function removeSubscription(subscription: any) {
@@ -41,7 +42,7 @@ function removeSubscription(subscription: any) {
       </div>
     </div>
     <div>
-      <Button label="检测可用订阅" />
+      <Button label="检测可用订阅" @click="settingStore.checkSubscriptionStatus" />
     </div>
     <Listbox
       v-model="settingStore.currentSubscription"
@@ -52,7 +53,13 @@ function removeSubscription(subscription: any) {
     >
       <template #option="slotProps">
         <div class="flex flex-1 items-center justify-between">
-          {{ slotProps.option.name }}
+          <!-- 状态点 -->
+          <div class="flex flex-row gap-2 items-center">
+            {{ slotProps.option.name }}
+            <div class="w-2 h-2 rounded-full" :class="slotProps.option.status === 'available' ? 'bg-green-500' : slotProps.option.status === 'unavailable' ? 'bg-red-500' : 'bg-gray-500'" />
+          </div>
+
+          <span class="text-sm text-gray-500 truncate">{{ slotProps.option.url }}</span>
           <div>
             <span class="icon-[solar--close-circle-line-duotone]" @click="removeSubscription(slotProps.option)" />
           </div>

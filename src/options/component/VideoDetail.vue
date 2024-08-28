@@ -33,7 +33,7 @@ const episodes = computed(() => {
 })
 function play(url: string) {
   // console.log(url)
-  window.open(url, '_blank')
+  window.open(`/dist/options/index.html/#/play?url=${encodeURIComponent(url)}`, '_blank')
 }
 </script>
 
