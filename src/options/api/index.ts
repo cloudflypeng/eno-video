@@ -2,10 +2,11 @@ import { efetch } from '@meanc/webext-fetch'
 
 function search(baseUrl: string, params: Record<string, any>) {
   const defaultParams = {
-    mid: 1,
-    limit: 10,
-    imestamp: Date.now().toString(),
+    ac: 'detail',
+    pg: 1,
     wd: '',
+    at: 'json',
+    h: 3600,
   }
 
   params = {
@@ -13,7 +14,7 @@ function search(baseUrl: string, params: Record<string, any>) {
     ...params,
   }
   let url = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`
-  url += 'index.php/ajax/suggest'
+  url += 'api.php/provide/vod'
   url += `?${new URLSearchParams(params).toString()}`
   // 两个// 替换为一个/
   return efetch(url, {

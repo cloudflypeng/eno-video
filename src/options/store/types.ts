@@ -1,7 +1,5 @@
 interface VideoCoverType {
-  id: number
-  name: string
-  pic: string
+  [key: string]: any
 }
 
 export {

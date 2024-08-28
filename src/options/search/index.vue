@@ -26,10 +26,8 @@ function search() {
     <div class="flex gap-4 flex-wrap">
       <VideoCover
         v-for="item in result"
-        :id="item.id"
         :key="item.id"
-        :name="item.name"
-        :pic="item.pic"
+        :video-data="item"
       />
     </div>
   </section>
