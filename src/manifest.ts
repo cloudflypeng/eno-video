@@ -15,7 +15,6 @@ export async function getManifest() {
     description: pkg.description,
     action: {
       default_icon: './assets/icon-512.png',
-      default_popup: './dist/popup/index.html',
     },
     options_ui: {
       page: './dist/options/index.html',
@@ -38,19 +37,9 @@ export async function getManifest() {
       'tabs',
       'storage',
       'activeTab',
-      'sidePanel',
+      // 'sidePanel',
     ],
     host_permissions: ['*://*/*'],
-    content_scripts: [
-      {
-        matches: [
-          '<all_urls>',
-        ],
-        js: [
-          'dist/contentScripts/index.global.js',
-        ],
-      },
-    ],
     web_accessible_resources: [
       {
         resources: ['dist/contentScripts/style.css'],
@@ -63,19 +52,6 @@ export async function getManifest() {
         ? `script-src \'self\' http://localhost:${port}; object-src \'self\'`
         : 'script-src \'self\'; object-src \'self\'',
     },
-  }
-
-  // add sidepanel
-  if (isFirefox) {
-    manifest.sidebar_action = {
-      default_panel: 'dist/sidepanel/index.html',
-    }
-  }
-  else {
-    // the sidebar_action does not work for chromium based
-    manifest.side_panel = {
-      default_path: 'dist/sidepanel/index.html',
-    }
   }
 
   // FIXME: not work in MV3

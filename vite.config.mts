@@ -8,9 +8,11 @@ import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-import UnoCSS from 'unocss/vite'
+import postcss from 'postcss'
+import tailwindcss from 'tailwindcss'
 import { isDev, port, r } from './scripts/utils'
 import packageJson from './package.json'
+// 引入 PostCSS 和 Tailwind CSS
 
 export const sharedConfig: UserConfig = {
   root: r('src'),
@@ -54,9 +56,6 @@ export const sharedConfig: UserConfig = {
     // https://github.com/antfu/unplugin-icons
     Icons(),
 
-    // https://github.com/unocss/unocss
-    UnoCSS(),
-
     // rewrite assets to use relative path
     {
       name: 'assets-rewrite',
@@ -67,6 +66,15 @@ export const sharedConfig: UserConfig = {
       },
     },
   ],
+  // 添加 CSS 相关配置
+  css: {
+    postcss: {
+      plugins: [
+        postcss(),
+        tailwindcss(),
+      ],
+    },
+  },
   optimizeDeps: {
     include: [
       'vue',
@@ -103,8 +111,6 @@ export default defineConfig(({ command }) => ({
     rollupOptions: {
       input: {
         options: r('src/options/index.html'),
-        popup: r('src/popup/index.html'),
-        sidepanel: r('src/sidepanel/index.html'),
       },
     },
   },
