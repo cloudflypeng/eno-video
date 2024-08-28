@@ -14,6 +14,12 @@ function addSubscription() {
     url: url.value,
   })
 }
+function removeSubscription(subscription: any) {
+  settingStore.subscription = settingStore.subscription.filter((item: any) => item.name !== subscription.name)
+  if (settingStore.currentSubscription?.name === subscription.name) {
+    settingStore.currentSubscription = settingStore.subscription[0]
+  }
+}
 </script>
 
 <template>
@@ -34,11 +40,24 @@ function addSubscription() {
         当前没有订阅
       </div>
     </div>
+    <div>
+      <Button label="检测可用订阅" />
+    </div>
     <Listbox
       v-model="settingStore.currentSubscription"
       class="w-1/2"
       :options="settingStore.subscription"
       option-label="name"
-    />
+      checkmark
+    >
+      <template #option="slotProps">
+        <div class="flex flex-1 items-center justify-between">
+          {{ slotProps.option.name }}
+          <div>
+            <span class="icon-[solar--close-circle-line-duotone]" @click="removeSubscription(slotProps.option)" />
+          </div>
+        </div>
+      </template>
+    </Listbox>
   </section>
 </template>
