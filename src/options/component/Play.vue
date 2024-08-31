@@ -24,5 +24,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <video ref="videoPlayer" class="video-js w-full aspect-video " />
+  <video ref="videoPlayer" class="video-js h-[80vh] w-[80vw] aspect-video" />
 </template>

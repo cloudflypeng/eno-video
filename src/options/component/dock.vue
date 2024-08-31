@@ -50,6 +50,7 @@ function handleClick(e: any, item: any) {
 <template>
   <Dock
     :model="items" :position="settingStore.dock.position"
+    class="ml-3"
   >
     <template #item="{ item }">
       <RouterLink :to="item.to || '#'" class="dock-item">
