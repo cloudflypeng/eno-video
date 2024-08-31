@@ -10,11 +10,15 @@ const settingStore = useSettingStore()
 const currentSubscription = settingStore.currentSubscription
 const keyword = ref('')
 const result: Ref<VideoCoverType[]> = ref([])
+const loading = ref(false)
 function search() {
+  loading.value = true
   api.search(currentSubscription.url, {
     wd: keyword.value,
   }).then((res) => {
     result.value = res.list as VideoCoverType[]
+  }).finally(() => {
+    loading.value = false
   })
 }
 </script>
@@ -23,7 +27,8 @@ function search() {
   <section class="flex flex-col gap-4 items-start p-4">
     <div class="flex flex-row gap-4 items-center justify-center w-full">
       <InputText v-model="keyword" @keyup.enter="search" />
-      <Button label="搜索" @click="search" />
+      <Button label="搜索" :loading="loading" @click="search" />
+      <span v-if="!loading && result.length" class="px-3">{{ `${result.length} 条结果` }}</span>
     </div>
     <div class="flex gap-4 flex-wrap">
       <VideoCover
