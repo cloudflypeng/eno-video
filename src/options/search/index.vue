@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
-import VideoCover from '../component/VideoCover.vue'
+import MovieCard from '../component/movie-card.vue'
 import { useSettingStore } from '../store/setting'
 import api from '../api'
 import type { VideoCoverType } from '../store/types'
@@ -31,7 +31,7 @@ function search() {
       <span v-if="!loading && result.length" class="px-3">{{ `${result.length} 条结果` }}</span>
     </div>
     <div class="flex gap-4 flex-wrap">
-      <VideoCover
+      <MovieCard
         v-for="item in result"
         :key="item.id"
         :video-data="item"

@@ -3,7 +3,7 @@ import { onMounted, watch } from 'vue'
 import ProgressSpinner from 'primevue/progressspinner'
 import api from '../api'
 import { useSettingStore } from '../store/setting'
-import VideoCover from '../component/VideoCover.vue'
+import MovieCard from '../component/movie-card.vue'
 
 interface prdRes {
   list: object[]
@@ -62,7 +62,7 @@ onMounted(() => {
         </span>
         <div class="flex gap-4 overflow-auto mb-5">
           <div class="flex gap-4">
-            <VideoCover
+            <MovieCard
               v-for="item in movies[type.type_id]"
               :key="item.id"
               :video-data="item"
